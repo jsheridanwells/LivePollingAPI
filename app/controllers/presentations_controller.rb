@@ -46,6 +46,6 @@ class PresentationsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def presentation_params
-      params.require(:presentation).permit(:user_id_id, :title)
+      params.require(:presentation).permit(:user_id, :title)
     end
 end
