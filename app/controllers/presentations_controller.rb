@@ -3,8 +3,8 @@ class PresentationsController < ApplicationController
 
   # GET /presentations
   def index
-    @presentations = Presentation.all
-
+    @presentations = Presentation.where(user_id: @current_user.id)
+    # @presentations = Presentation.all
     render json: @presentations
   end
 
