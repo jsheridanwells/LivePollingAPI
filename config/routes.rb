@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   delete '/logout',  to: 'sessions#destroy'
 
   post 'signup', to: 'users#create'
+  post 'authenticate', to: 'authentication#authenticate'
 
   resources :users
 
