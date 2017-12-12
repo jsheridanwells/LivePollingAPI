@@ -14,14 +14,14 @@ User.create(
     password_confirmation: '123456'
   )
 
-50.times do
+10.times do
   Presentation.create(
       user_id: 1,
       title: Faker::StarWars.quote
     )
 end
 
-50.times do
+10.times do
   Presentation.create(
       user_id: 2,
       title: Faker::StarWars.quote
