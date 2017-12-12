@@ -42,9 +42,7 @@ class PresentationsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_presentation
-      puts "$$$$$$$$$$$$ params id #{params[:id]}"
       @presentation = Presentation.find(params[:id])
-      puts "$$$$$$$$$$$$ @presentation #{@presentation.id}"
     end
 
     # Only allow a trusted parameter "white list" through.
