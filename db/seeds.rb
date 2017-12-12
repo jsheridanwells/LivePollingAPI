@@ -21,6 +21,19 @@ User.create(
     )
 end
 
+10.times do |i|
+  Poll.create(
+      presentation_id: 1,
+      content: "Poll number #{i}"
+    )
+  3.times do
+    Item.create(
+        poll_id: i + 1,
+        content: "Item #{i}"
+      )
+  end
+end
+
 10.times do
   Presentation.create(
       user_id: 2,

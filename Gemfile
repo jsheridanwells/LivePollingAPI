@@ -28,6 +28,7 @@ gem 'bcrypt',         '3.1.11'
 gem 'jwt'
 gem 'simple_command'
 gem 'faker'
+gem 'active_model_serializers', '0.9.3'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
