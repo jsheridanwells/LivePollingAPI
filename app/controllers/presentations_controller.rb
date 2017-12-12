@@ -36,6 +36,7 @@ class PresentationsController < ApplicationController
   # DELETE /presentations/1
   def destroy
     @presentation.destroy
+    render json: :deleted
   end
 
   private
