@@ -2,13 +2,6 @@ class PresentationsController < ApplicationController
   skip_before_action :authenticate_request, only: [:show_to_participant]
   before_action :set_presentation, only: [:show, :show_to_participant, :update, :broadcast, :destroy]
 
-  # nullifies :authenticate_request for :show_to_participant
-  # then authenticates if @presentations.broadcasting condition
-  # is not met.... see:
-  # https://github.com/rails/rails/issues/9703
-  # skip_before_action :authenticate_request, only: [:show_to_participant]
-  # before_action :authenticate_request, only: [:show_to_participant], unless: :set_presentation
-
   # GET /presentations
   def index
     @presentations = Presentation.where(user_id: @current_user.id)
