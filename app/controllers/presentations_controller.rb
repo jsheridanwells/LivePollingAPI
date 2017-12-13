@@ -1,15 +1,26 @@
 class PresentationsController < ApplicationController
-  before_action :set_presentation, only: [:show, :update, :broadcast, :destroy]
+  before_action :set_presentation, only: [:show, :show_to_participant, :update, :broadcast, :destroy]
+
+  # nullifies :authenticate_request for :show_to_participant
+  # then authenticates if @presentations.broadcasting condition
+  # is not met.... see:
+  # https://github.com/rails/rails/issues/9703
+  skip_before_action :authenticate_request, only: [:show_to_participant]
+  before_action :authenticate_request, only: [:show_to_participant], unless: :set_presentation
+
 
   # GET /presentations
   def index
     @presentations = Presentation.where(user_id: @current_user.id)
-    # @presentations = Presentation.all
     render json: @presentations
   end
 
   # GET /presentations/1
   def show
+    render json: @presentation
+  end
+
+  def show_to_participant
     render json: @presentation
   end
 
@@ -49,6 +60,7 @@ class PresentationsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_presentation
       @presentation = Presentation.find(params[:id])
+      @presentation.broadcasting
     end
 
     # Only allow a trusted parameter "white list" through.

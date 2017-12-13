@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   post 'signup', to: 'users#create'
   post 'authenticate', to: 'authentication#authenticate'
   patch 'broadcast/:id', to: 'presentations#broadcast'
+  get 'show-presentation/:id', to: 'presentations#show_to_participant'
 
   resources :users
   resources :presentations
