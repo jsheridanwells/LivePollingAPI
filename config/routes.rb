@@ -15,4 +15,6 @@ Rails.application.routes.draw do
   resources :users
   resources :presentations
 
+  mount ActionCable.server, at: '/cable'
+
 end

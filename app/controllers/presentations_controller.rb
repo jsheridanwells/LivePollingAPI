@@ -61,8 +61,12 @@ class PresentationsController < ApplicationController
     unless (@presentation.current_slide + 1)== @presentation.polls.length
       count = @presentation.current_slide += 1
       @presentation.update_attribute(:current_slide, count)
+      if @presentation.save
+        ActionCable.server.broadcast 'presentation_channel',
+                                     @presentation
+      end
     end
-    render json: @presentation
+    # render json: @presentation
   end
 
   # regresses current slide

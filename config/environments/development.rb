@@ -44,4 +44,9 @@ Rails.application.configure do
   # Use an evented file watcher to asynchronously detect changes in source code,
   # routes, locales, etc. This feature depends on the listen gem.
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
+
+  # allow cable requests from separate origin in Rails.application.configure...
+  config.action_cable.allowed_request_origins = ['http://127.0.0.1:8080/']
+  config.action_cable.disable_request_forgery_protection = true
+  config.action_cable.allow_same_origin_as_host = false
 end
