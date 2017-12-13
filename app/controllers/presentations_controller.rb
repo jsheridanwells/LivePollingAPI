@@ -62,7 +62,7 @@ class PresentationsController < ApplicationController
       count = @presentation.current_slide += 1
       @presentation.update_attribute(:current_slide, count)
     end
-    render json: { current_slide: @presentation.current_slide }
+    render json: @presentation
   end
 
   # regresses current slide
@@ -71,7 +71,7 @@ class PresentationsController < ApplicationController
       count = @presentation.current_slide -= 1
       @presentation.update_attribute(:current_slide, count)
     end
-    render json: { current_slide: @presentation.current_slide }
+    render json: @presentation
   end
 
   # DELETE /presentations/1
