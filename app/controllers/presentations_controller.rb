@@ -1,5 +1,5 @@
 class PresentationsController < ApplicationController
-  before_action :set_presentation, only: [:show, :update, :destroy]
+  before_action :set_presentation, only: [:show, :update, :broadcast, :destroy]
 
   # GET /presentations
   def index
@@ -33,6 +33,12 @@ class PresentationsController < ApplicationController
     end
   end
 
+  # toggles true/false value of presentation broadcasting
+  def broadcast
+    @presentation.update_attribute(:broadcasting, !@presentation.broadcasting)
+    render json: @presentation, status: :updated, location @presentation
+  end
+
   # DELETE /presentations/1
   def destroy
     @presentation.destroy
@@ -47,6 +53,6 @@ class PresentationsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def presentation_params
-      params.require(:presentation).permit(:user_id, :title)
+      params.require(:presentation).permit(:user_id, :title, :broadcasting)
     end
 end
