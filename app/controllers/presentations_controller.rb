@@ -36,7 +36,7 @@ class PresentationsController < ApplicationController
   # toggles true/false value of presentation broadcasting
   def broadcast
     @presentation.update_attribute(:broadcasting, !@presentation.broadcasting)
-    render json: @presentation, status: :updated, location @presentation
+    render json: @presentation
   end
 
   # DELETE /presentations/1

@@ -1,4 +1,4 @@
 class PresentationSerializer < ActiveModel::Serializer
-  attributes :id, :title
+  attributes :id, :title, :broadcasting
   has_many :polls
 end
