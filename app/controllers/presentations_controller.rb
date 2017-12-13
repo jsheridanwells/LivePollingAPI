@@ -58,7 +58,7 @@ class PresentationsController < ApplicationController
 
   # advances current slide
   def next_slide
-    unless (@presentation.current_slide)== @presentation.polls.length
+    unless (@presentation.current_slide + 1)== @presentation.polls.length
       count = @presentation.current_slide += 1
       @presentation.update_attribute(:current_slide, count)
     end
