@@ -61,7 +61,7 @@ class PresentationsController < ApplicationController
     unless (@presentation.current_slide + 1)== @presentation.polls.length
       count = @presentation.current_slide += 1
       @presentation.update_attribute(:current_slide, count)
-      ActionCable.server.broadcast 'presentation_channel',
+      ActionCable.server.broadcast "presentation_channel#{params[:id]}",
         {
           current_poll: @presentation.polls[@presentation.current_slide].content,
           items: @presentation.polls[@presentation.current_slide].items,
@@ -76,7 +76,7 @@ class PresentationsController < ApplicationController
     unless @presentation.current_slide == 0
       count = @presentation.current_slide -= 1
       @presentation.update_attribute(:current_slide, count)
-      ActionCable.server.broadcast 'presentation_channel',
+      ActionCable.server.broadcast "presentation_channel#{params[:id]}",
         {
           current_poll: @presentation.polls[@presentation.current_slide].content,
           items: @presentation.polls[@presentation.current_slide].items,
