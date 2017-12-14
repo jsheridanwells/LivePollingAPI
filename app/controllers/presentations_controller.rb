@@ -24,6 +24,12 @@ class PresentationsController < ApplicationController
   def show_to_participant
     if @presentation.broadcasting
       render json: @presentation
+      ActionCable.server.broadcast "presentation_channel#{params[:id]}",
+        {
+          current_poll: @presentation.polls[@presentation.current_slide].content,
+          items: @presentation.polls[@presentation.current_slide].items,
+          current_slide: @presentation.current_slide
+        }
     else
       render json: { message: 'This presentation is not currently available', title: @presentation.title }
     end
