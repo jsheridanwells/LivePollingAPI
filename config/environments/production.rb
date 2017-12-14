@@ -80,4 +80,8 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+
+  # action cable redis endpoint config
+  config.action_cable.url = 'wss://ancient-sierra-59888.herokuapp.com/cable'
+  config.action_cable.allowed_request_origins = ['http://localhost:8080/', /http:\/\/localhost:8080.*/]
 end
