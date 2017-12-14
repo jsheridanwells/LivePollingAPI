@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171213203647) do
+ActiveRecord::Schema.define(version: 20171214181345) do
 
   create_table "items", force: :cascade do |t|
     t.string "content"
@@ -36,6 +36,13 @@ ActiveRecord::Schema.define(version: 20171213203647) do
     t.boolean "broadcasting", default: false
     t.integer "current_slide", default: 0
     t.index ["user_id"], name: "index_presentations_on_user_id"
+  end
+
+  create_table "responses", force: :cascade do |t|
+    t.integer "item_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["item_id"], name: "index_responses_on_item_id"
   end
 
   create_table "users", force: :cascade do |t|
