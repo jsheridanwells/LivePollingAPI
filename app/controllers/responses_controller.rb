@@ -3,7 +3,8 @@ class ResponsesController < ApplicationController
   def add
     @response = Response.new(response_params)
     if @response.save
-      render json: @response, status: :created
+      @presentation = Presentation.find(params[:id])
+      ActionCable.server.broadcast "response_channel#{params[:id]}", { data: @presentation }
     else
       render json: @response.errors, status: :unprocessable_entity
     end
