@@ -83,5 +83,5 @@ Rails.application.configure do
 
   # action cable redis config
   config.action_cable.url = 'wss://ancient-sierra-59888.herokuapp.com/cable'
-  config.action_cable.allowed_request_origins = ['http://http://localhost:8080/']
+  config.action_cable.allowed_request_origins = ['http://localhost:8080/']
 end
