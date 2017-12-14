@@ -25,7 +25,7 @@ class PresentationsController < ApplicationController
     if @presentation.broadcasting
       render json: @presentation
     else
-      render json: { message: 'This presentation is not currently available', title: @presentation.title}
+      render json: { message: 'This presentation is not currently available', title: @presentation.title }
     end
 
   end
@@ -61,12 +61,14 @@ class PresentationsController < ApplicationController
     unless (@presentation.current_slide + 1)== @presentation.polls.length
       count = @presentation.current_slide += 1
       @presentation.update_attribute(:current_slide, count)
-      if @presentation.save
-        ActionCable.server.broadcast 'presentation_channel',
-                                     @presentation
-      end
+      ActionCable.server.broadcast 'presentation_channel',
+        {
+          current_poll: @presentation.polls[@presentation.current_slide].content,
+          items: @presentation.polls[@presentation.current_slide].items,
+          current_slide: @presentation.current_slide
+        }
     end
-    # render json: @presentation
+    render json: @presentation
   end
 
   # regresses current slide
@@ -74,6 +76,12 @@ class PresentationsController < ApplicationController
     unless @presentation.current_slide == 0
       count = @presentation.current_slide -= 1
       @presentation.update_attribute(:current_slide, count)
+      ActionCable.server.broadcast 'presentation_channel',
+        {
+          current_poll: @presentation.polls[@presentation.current_slide].content,
+          items: @presentation.polls[@presentation.current_slide].items,
+          current_slide: @presentation.current_slide
+        }
     end
     render json: @presentation
   end
