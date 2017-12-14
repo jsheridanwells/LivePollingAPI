@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   patch 'next/:id', to: 'presentations#next_slide'
   patch 'prev/:id', to: 'presentations#prev_slide'
   get 'show-presentation/:id', to: 'presentations#show_to_participant'
-  post 'respond/:id', to: 'responses#add'
+  post 'respond', to: 'responses#add'
 
   resources :users
   resources :presentations
