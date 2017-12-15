@@ -25,7 +25,6 @@ class ResponsesController < ApplicationController
       @responses_arr = Array.new
       items = Item.where(poll_id: poll_id)
       items.each do |item|
-        puts "$$$$$$$$$$$ #{item}"
         responses = Response.where(item_id: item.id).size
         @responses_arr.push(responses)
       end
