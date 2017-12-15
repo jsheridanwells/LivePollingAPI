@@ -5,8 +5,8 @@ class ResponsesController < ApplicationController
   def add
     response = Response.new(response_params)
     if response.save
-      count_responses(@presentation.polls)
-      ActionCable.server.broadcast "response_channel#{params[:id]}", { data: @response_arr }
+      count_responses(params[:poll_id])
+      ActionCable.server.broadcast "response_channel#{params[:presentation_id]}", { data: @responses_arr }
     else
       render json: response.errors, status: :unprocessable_entity
     end
@@ -18,17 +18,15 @@ class ResponsesController < ApplicationController
     end
 
     def set_presentation
-      @presentation = Presentation.find(params[:id])
+      @presentation = Presentation.find(params[:presentation_id])
     end
 
-    def count_responses(poll_arr)
-      @response_arr = Array.new
-      poll_arr.each do |poll|
-        items = Item.where(poll_id: poll.id)
-        items.each do |item|
-          responses = Response.where(item_id: item.id).size
-          @response_arr.push(responses) if responses > 0
-        end
+    def count_responses(poll_id)
+      @responses_arr = Array.new
+      items = Item.where(poll_id: poll_id)
+      items.each do |item|
+        responses = Response.where(item_id: item.id).size
+        @responses_arr.push(responses)
       end
     end
 end
