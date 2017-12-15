@@ -1,8 +1,6 @@
 Rails.application.routes.draw do
   get 'responses/add'
 
-  resources :items
-  resources :polls
 
   post 'signup', to: 'users#create'
   post 'authenticate', to: 'authentication#authenticate'
@@ -14,6 +12,8 @@ Rails.application.routes.draw do
 
   resources :users
   resources :presentations
+  resources :polls
+  resources :items
 
   mount ActionCable.server, at: '/cable'
 
