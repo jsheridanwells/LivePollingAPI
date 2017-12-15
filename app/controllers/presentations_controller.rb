@@ -64,6 +64,7 @@ class PresentationsController < ApplicationController
       ActionCable.server.broadcast "presentation_channel#{params[:id]}",
         {
           current_poll: @presentation.polls[@presentation.current_slide].content,
+          current_poll_id: @presentation.polls[@presentation.current_slide].id,
           items: @presentation.polls[@presentation.current_slide].items,
           current_slide: @presentation.current_slide
         }
