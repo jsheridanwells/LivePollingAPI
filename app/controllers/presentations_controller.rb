@@ -65,6 +65,7 @@ class PresentationsController < ApplicationController
         {
           current_poll: @presentation.polls[@presentation.current_slide].content,
           current_poll_id: @presentation.polls[@presentation.current_slide].id,
+          current_poll_response_type: @presentation.polls[@presentation.current_slide].response_type,
           items: @presentation.polls[@presentation.current_slide].items,
           current_slide: @presentation.current_slide
         }
@@ -81,6 +82,7 @@ class PresentationsController < ApplicationController
         {
           current_poll: @presentation.polls[@presentation.current_slide].content,
           current_poll_id: @presentation.polls[@presentation.current_slide].id,
+          current_poll_response_type: @presentation.polls[@presentation.current_slide].response_type,
           items: @presentation.polls[@presentation.current_slide].items,
           current_slide: @presentation.current_slide
         }
