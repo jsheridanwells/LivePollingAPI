@@ -14,7 +14,7 @@ class ResponsesController < ApplicationController
 
   private
     def response_params
-      params.require(:response).permit(:item_id)
+      params.require(:response).permit(:item_id, :written)
     end
 
     def set_presentation

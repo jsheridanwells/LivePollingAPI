@@ -50,6 +50,8 @@ class PollsController < ApplicationController
       params.require(:poll).permit(
         :content,
         :presentation_id,
+        :response_type,
+        :feedback_type,
         items_attributes: [:content]
         )
     end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171214181345) do
+ActiveRecord::Schema.define(version: 20171220173649) do
 
   create_table "items", force: :cascade do |t|
     t.string "content"
@@ -25,6 +25,8 @@ ActiveRecord::Schema.define(version: 20171214181345) do
     t.integer "presentation_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "response_type", default: 1
+    t.integer "feedback_type", default: 1
     t.index ["presentation_id"], name: "index_polls_on_presentation_id"
   end
 
@@ -42,6 +44,7 @@ ActiveRecord::Schema.define(version: 20171214181345) do
     t.integer "item_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "written"
     t.index ["item_id"], name: "index_responses_on_item_id"
   end
 
