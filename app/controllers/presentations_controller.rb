@@ -90,6 +90,12 @@ class PresentationsController < ApplicationController
     render json: @presentation
   end
 
+  def show_results
+    # ActionCable.server.broadcast "presentation_channel#{params[:id]}",
+    #     { responding_active: false }
+    render json: { responding_active: false }
+  end
+
   # DELETE /presentations/1
   def destroy
     @presentation.destroy
