@@ -52,7 +52,7 @@ class PollsController < ApplicationController
         :presentation_id,
         :response_type,
         :feedback_type,
-        items_attributes: [:content]
+        items_attributes: [:content, :correct]
         )
     end
 end
