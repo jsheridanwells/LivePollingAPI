@@ -90,10 +90,10 @@ class PresentationsController < ApplicationController
     render json: @presentation
   end
 
+  # message from presenter to participant, disables responding in participants' view
   def show_results
-    # ActionCable.server.broadcast "presentation_channel#{params[:id]}",
-    #     { responding_active: false }
-    render json: { responding_active: false }
+    ActionCable.server.broadcast "presentation_channel#{params[:id]}",
+        { responding_active: false }
   end
 
   # DELETE /presentations/1
