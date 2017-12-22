@@ -6,7 +6,7 @@ The deployed version [will live here](https://dry-basin-97037.herokuapp.com/)
 This is the API for the LivePolling app.
 
 
-Code for the front end interface [can be found here](https://github.com/jsheridanwells/LivePollingInterface)
+Code for the client interface [can be found here](https://github.com/jsheridanwells/LivePollingInterface)
 
  # OVERVIEW
 
