@@ -36,7 +36,11 @@ class PollsController < ApplicationController
 
   # DELETE /polls/1
   def destroy
+    @presentation = Presentation.find(@poll.presentation_id)
     @poll.destroy
+    count = @presentation.current_slide - 1 unless @presentation.current_slide == 0
+    @presentation.update_attribute(:current_slide, count) unless !count
+    render json: @presentation
   end
 
   private
