@@ -27,6 +27,13 @@ class PollsController < ApplicationController
 
   # PATCH/PUT /polls/1
   def update
+    @items = Item.where(poll_id: @poll.id)
+    puts "poll params: #{poll_params}"
+    # @items.each do |item|
+    #   poll_params[:poll].item_attributes.each do |edited_item|
+    #     item.destroy unless item.id = edited_item.id
+    #   end
+    # end
     if @poll.update(poll_params)
       render json: @poll
     else
