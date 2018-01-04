@@ -26,7 +26,11 @@ class ResponsesController < ApplicationController
       items = Item.where(poll_id: poll_id)
       items.each do |item|
         responses = Response.where(item_id: item.id).size
-        @responses_arr.push(responses)
+        @responses_arr.push({
+            itemContent: item.content,
+            responseCount: responses,
+            correct: item.correct
+          })
       end
     end
 end
