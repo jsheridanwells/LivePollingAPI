@@ -33,10 +33,10 @@ class ItemsController < ApplicationController
   #   end
   # end
 
-  # # DELETE /items/1
-  # def destroy
-  #   @item.destroy
-  # end
+  # DELETE /items/1
+  def destroy
+    @item.destroy
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.
