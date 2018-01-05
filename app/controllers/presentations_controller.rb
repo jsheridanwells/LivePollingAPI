@@ -67,6 +67,14 @@ class PresentationsController < ApplicationController
   def broadcast
     @presentation.update_attribute(:broadcasting, !@presentation.broadcasting)
     render json: @presentation
+    if !@presentation.broadcasting
+      ActionCable.server.broadcast "presentation_channel#{params[:id]}",
+      {
+        title: @presentation.title,
+        message: 'This presentation is not currently available.',
+        responding_active: true
+      }
+    end
   end
 
   # advances current slide
