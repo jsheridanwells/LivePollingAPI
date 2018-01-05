@@ -24,9 +24,23 @@ class PresentationsController < ApplicationController
 
   def show_to_participant
     if @presentation.broadcasting
-      render json: @presentation
+      render json: {
+          title: @presentation.title,
+          broadcasting: @presentation.broadcasting,
+          current_poll: @presentation.polls[@presentation.current_slide].content,
+          current_poll_id: @presentation.polls[@presentation.current_slide].id,
+          current_poll_response_type: @presentation.polls[@presentation.current_slide].response_type,
+          items: @presentation.polls[@presentation.current_slide].items,
+          current_slide: @presentation.current_slide,
+          responding_active: true
+        }
     else
-      render json: { message: 'This presentation is not currently available', title: @presentation.title }
+      render json: {
+        title: @presentation.title,
+        broadcasting: @presentation.broadcasting,
+        message: 'This presentation is not currently available.',
+        responding_active: true
+      }
     end
 
   end
@@ -55,6 +69,27 @@ class PresentationsController < ApplicationController
   def broadcast
     @presentation.update_attribute(:broadcasting, !@presentation.broadcasting)
     render json: @presentation
+    if @presentation.broadcasting
+      ActionCable.server.broadcast "presentation_channel#{params[:id]}",
+        {
+          broadcasting: @presentation.broadcasting,
+          current_poll: @presentation.polls[@presentation.current_slide].content,
+          current_poll_id: @presentation.polls[@presentation.current_slide].id,
+          current_poll_response_type: @presentation.polls[@presentation.current_slide].response_type,
+          items: @presentation.polls[@presentation.current_slide].items,
+          current_slide: @presentation.current_slide,
+          responding_active: true,
+          message: ''
+        }
+    else
+      ActionCable.server.broadcast "presentation_channel#{params[:id]}",
+      {
+        title: @presentation.title,
+        broadcasting: @presentation.broadcasting,
+        message: 'This presentation is not currently available.',
+        responding_active: true
+      }
+    end
   end
 
   # advances current slide
@@ -62,15 +97,18 @@ class PresentationsController < ApplicationController
     unless (@presentation.current_slide + 1)== @presentation.polls.length
       count = @presentation.current_slide += 1
       @presentation.update_attribute(:current_slide, count)
-      ActionCable.server.broadcast "presentation_channel#{params[:id]}",
-        {
-          current_poll: @presentation.polls[@presentation.current_slide].content,
-          current_poll_id: @presentation.polls[@presentation.current_slide].id,
-          current_poll_response_type: @presentation.polls[@presentation.current_slide].response_type,
-          items: @presentation.polls[@presentation.current_slide].items,
-          current_slide: @presentation.current_slide,
-          responding_active: true
-        }
+      if @presentation.broadcasting
+        ActionCable.server.broadcast "presentation_channel#{params[:id]}",
+          {
+            broadcasting: @presentation.broadcasting,
+            current_poll: @presentation.polls[@presentation.current_slide].content,
+            current_poll_id: @presentation.polls[@presentation.current_slide].id,
+            current_poll_response_type: @presentation.polls[@presentation.current_slide].response_type,
+            items: @presentation.polls[@presentation.current_slide].items,
+            current_slide: @presentation.current_slide,
+            responding_active: true
+          }
+      end
     end
     render json: @presentation
   end
@@ -80,15 +118,18 @@ class PresentationsController < ApplicationController
     unless @presentation.current_slide == 0
       count = @presentation.current_slide -= 1
       @presentation.update_attribute(:current_slide, count)
-      ActionCable.server.broadcast "presentation_channel#{params[:id]}",
-        {
-          current_poll: @presentation.polls[@presentation.current_slide].content,
-          current_poll_id: @presentation.polls[@presentation.current_slide].id,
-          current_poll_response_type: @presentation.polls[@presentation.current_slide].response_type,
-          items: @presentation.polls[@presentation.current_slide].items,
-          current_slide: @presentation.current_slide,
-          responding_active: true
-        }
+      if @presentation.broadcasting
+        ActionCable.server.broadcast "presentation_channel#{params[:id]}",
+          {
+            broadcasting: @presentation.broadcasting,
+            current_poll: @presentation.polls[@presentation.current_slide].content,
+            current_poll_id: @presentation.polls[@presentation.current_slide].id,
+            current_poll_response_type: @presentation.polls[@presentation.current_slide].response_type,
+            items: @presentation.polls[@presentation.current_slide].items,
+            current_slide: @presentation.current_slide,
+            responding_active: true
+          }
+      end
     end
     render json: @presentation
   end
