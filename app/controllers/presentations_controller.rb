@@ -26,7 +26,13 @@ class PresentationsController < ApplicationController
     if @presentation.broadcasting
       render json: @presentation
     else
-      render json: { message: 'This presentation is not currently available', title: @presentation.title }
+      render json: {
+        :presentation => {
+          broadcasting: false,
+          message: 'This presentation is not currently available.',
+          title: @presentation.title
+        }
+      }
     end
 
   end
