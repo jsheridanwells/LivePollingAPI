@@ -37,7 +37,9 @@ class PresentationsController < ApplicationController
     else
       render json: {
         title: @presentation.title,
-        message: 'This presentation is not currently available.'
+        broadcasting: @presentation.broadcasting,
+        message: 'This presentation is not currently available.',
+        responding_active: true
       }
     end
 
@@ -67,10 +69,23 @@ class PresentationsController < ApplicationController
   def broadcast
     @presentation.update_attribute(:broadcasting, !@presentation.broadcasting)
     render json: @presentation
-    if !@presentation.broadcasting
+    if @presentation.broadcasting
+      ActionCable.server.broadcast "presentation_channel#{params[:id]}",
+        {
+          broadcasting: @presentation.broadcasting,
+          current_poll: @presentation.polls[@presentation.current_slide].content,
+          current_poll_id: @presentation.polls[@presentation.current_slide].id,
+          current_poll_response_type: @presentation.polls[@presentation.current_slide].response_type,
+          items: @presentation.polls[@presentation.current_slide].items,
+          current_slide: @presentation.current_slide,
+          responding_active: true,
+          message: ''
+        }
+    else
       ActionCable.server.broadcast "presentation_channel#{params[:id]}",
       {
         title: @presentation.title,
+        broadcasting: @presentation.broadcasting,
         message: 'This presentation is not currently available.',
         responding_active: true
       }
@@ -84,6 +99,7 @@ class PresentationsController < ApplicationController
       @presentation.update_attribute(:current_slide, count)
       ActionCable.server.broadcast "presentation_channel#{params[:id]}",
         {
+          broadcasting: @presentation.broadcasting,
           current_poll: @presentation.polls[@presentation.current_slide].content,
           current_poll_id: @presentation.polls[@presentation.current_slide].id,
           current_poll_response_type: @presentation.polls[@presentation.current_slide].response_type,
@@ -102,6 +118,7 @@ class PresentationsController < ApplicationController
       @presentation.update_attribute(:current_slide, count)
       ActionCable.server.broadcast "presentation_channel#{params[:id]}",
         {
+          broadcasting: @presentation.broadcasting,
           current_poll: @presentation.polls[@presentation.current_slide].content,
           current_poll_id: @presentation.polls[@presentation.current_slide].id,
           current_poll_response_type: @presentation.polls[@presentation.current_slide].response_type,
