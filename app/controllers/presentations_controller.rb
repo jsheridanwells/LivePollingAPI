@@ -24,14 +24,20 @@ class PresentationsController < ApplicationController
 
   def show_to_participant
     if @presentation.broadcasting
-      render json: @presentation
+      render json: {
+          title: @presentation.title,
+          broadcasting: @presentation.broadcasting,
+          current_poll: @presentation.polls[@presentation.current_slide].content,
+          current_poll_id: @presentation.polls[@presentation.current_slide].id,
+          current_poll_response_type: @presentation.polls[@presentation.current_slide].response_type,
+          items: @presentation.polls[@presentation.current_slide].items,
+          current_slide: @presentation.current_slide,
+          responding_active: true
+        }
     else
       render json: {
-        :presentation => {
-          broadcasting: false,
-          message: 'This presentation is not currently available.',
-          title: @presentation.title
-        }
+        title: @presentation.title,
+        message: 'This presentation is not currently available.'
       }
     end
 
