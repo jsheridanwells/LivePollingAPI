@@ -36,18 +36,20 @@ An audience can easily follow a presentation and respond to questions using any 
  ```$ cd LivePollingAPI```
  
  3. Install the required gems:
+ 
  ```$ bundle install```
  
  4. Create and migrate the database:
- ``` rails db:migrate```
  
- 5. (Optional): Seed the database. This will give you a test login which is username: example@example.com, password: 123456:
+ ``` $ rails db:migrate```
  
- ``` rails db:seed```
+ 5. (Optional): Seed the database. This will give you a test login which is username: `example@example.com`, password: `123456`:
+ 
+ ``` $ rails db:seed```
  
  6. Launch the rails server. This will run the API endpoints from http://localhost:3000:
  
- ``` rails server```
+ ``` $ rails server```
  
  7. If you have installed the [client side code](https://github.com/jsheridanwells/LivePolling), navigate to `http://localhost:8080`. The app should be functioning from the browser.
  
