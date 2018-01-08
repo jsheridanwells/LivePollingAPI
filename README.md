@@ -12,15 +12,15 @@ Poll and quiz an audience in real time.
 
 Create presentations with live __polls__ and __quizzes__. The results of the polls and quizzes can be displayed as charts in real time, or they can be hidden from audiences.
  
- <img src="/documentation/live-polling1.png" width="500" />
+ <img src="https://github.com/jsheridanwells/LivePolling/blob/master/documentation/live-polling1.png" width="500" />
  
 Easily share links with an audience using a URL shortener and QR codes.
 
-<img src="/documentation/live-polling2.png" width="500" />
+<img src="https://github.com/jsheridanwells/LivePolling/blob/master/documentation/live-polling2.png" width="500" />
  
 An audience can easily follow a presentation and respond to questions using any device.
 
-<img src="/documentation/live-polling3.png" width="500" />
+<img src="https://github.com/jsheridanwells/LivePolling/blob/master/documentation/live-polling3.png" width="500" />
  
  ## Local Installation and Setup
  You will need to have [Ruby 2.4.3](https://www.ruby-lang.org/en/downloads/) and [Ruby on Rails 5.1.4](http://rubyonrails.org/) installed. Additionally, you will ned to have [Bundler](https://bundler.io/) installed.
