@@ -1,38 +1,63 @@
- # Live Polling:
-__Present and Poll and Audience Instantly__
+# LivePolling
+Poll and quiz an audience in real time.
+<hr>
 
-### [View the deployed version](http://jeremywells.io/live-polling).
+[View the deployed version](http://jeremywells.io/live-polling).
 
-This is the API for the LivePolling app.
+[View the LivePolling Client source code](https://github.com/jsheridanwells/LivePolling).
 
+<hr>
 
-Code for the client interface [can be found here](https://github.com/jsheridanwells/LivePollingInterface)
+## Features
 
- # OVERVIEW
+Create presentations with live __polls__ and __quizzes__. The results of the polls and quizzes can be displayed as charts in real time, or they can be hidden from audiences.
+ 
+ <img src="/documentation/live-polling1.png" width="500" />
+ 
+Easily share links with an audience using a URL shortener and QR codes.
 
-The app Live Quiz provides a way for a teacher or a presenter to show content to an audience, solicit responses, and record data from those responses in real time.
+<img src="/documentation/live-polling2.png" width="500" />
+ 
+An audience can easily follow a presentation and respond to questions using any device.
 
- # FEATURES
+<img src="/documentation/live-polling3.png" width="500" />
+ 
+ ## Local Installation and Setup
+ You will need to have [Ruby 2.4.3](https://www.ruby-lang.org/en/downloads/) and [Ruby on Rails 5.1.4](http://rubyonrails.org/) installed. Additionally, you will ned to have [Bundler](https://bundler.io/) installed.
+ 
+ Note: You will also need to have the [client-side code](https://github.com/jsheridanwells/LivePolling) installed and compiled. 
+ 
+ 1. Clone this repository: 
+ 
+ ```$ git clone https://github.com/jsheridanwells/LivePollingAPI.git```
+ 
+ 2. Navigate to the LivePollingAPI directory:
+ 
+ ```$ cd LivePollingAPI```
+ 
+ 3. Install the required gems:
+ ```$ bundle install```
+ 
+ 4. Create and migrate the database:
+ ``` rails db:migrate```
+ 
+ 5. (Optional): Seed the database. This will give you a test login which is username: example@example.com, password: 123456:
+ 
+ ``` rails db:seed```
+ 
+ 6. Launch the rails server. This will run the API endpoints from http://localhost:3000:
+ 
+ ``` rails server```
+ 
+ 7. If you have installed the [client side code](https://github.com/jsheridanwells/LivePolling), navigate to `http://localhost:8080`. The app should be functioning from the browser.
+ 
+ ## Build With:
 
- * The presenter can import slides from Google Slides to present to an audience through the app.
- * The presenter can send an access code to the presentation to an audience. With the access code, audience members can enter their names and stream the presentation on their own devices.
- * The presenter can insert poll questions or quiz questions in the presentation to ask the audience.
- * Using devices, the audience can respond to quiz questions and those responses will be recorded to a database.
- * TECHNICAL SPECIFICATIONS
+[Ruby on Rails 5.1.4](http://rubyonrails.org/)
 
- ## Live Polling will make use of the following technologies:
+## Author
+  Jeremy Sheridan Wells
 
- * Ruby on Rails for scaffolding the application models, controllers and views, creating an ORM, and querying a database.
- * Rails Action Cable for websockets integration.
- * The OminAuth gem for user authentication through Google.
- * The Google Slides API.
- * D3.js for data visualization.
- * Heroku for deploying the application.
+  [Github: jsheridanwells](http://www.github.com/jsheridanwells)
 
- ## GOALS
-
-The goals of the project are to:
-
- * Independently learn and implement new technologies, specifically Action Cable, OmniAuth, and the Google Docs API.
- * Create real-time interactions among application users through websockets.
- * Use a third-party API in the application. The Google Docs API will be used initially, possibly additionally incorporating the Khan Academy API later as a way to include more third-party content in the application.
+  [Twitter: @jsheridanwells](http://twitter.com/jsheridanwells)
