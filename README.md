@@ -23,7 +23,7 @@ An audience can easily follow a presentation and respond to questions using any 
 <img src="https://github.com/jsheridanwells/LivePolling/blob/master/documentation/live-polling3.png" width="500" />
  
  ## Local Installation and Setup
- You will need to have [Ruby 2.4.3](https://www.ruby-lang.org/en/downloads/) and [Ruby on Rails 5.1.4](http://rubyonrails.org/) installed. Additionally, you will ned to have [Bundler](https://bundler.io/) installed.
+ You will need to have [Ruby 2.4.3](https://www.ruby-lang.org/en/downloads/) and [Ruby on Rails 5.1.4](http://rubyonrails.org/) installed. Additionally, you will need to have [Bundler](https://bundler.io/) installed.
  
  Note: You will also need to have the [client-side code](https://github.com/jsheridanwells/LivePolling) installed and compiled. 
  
@@ -53,7 +53,7 @@ An audience can easily follow a presentation and respond to questions using any 
  
  7. If you have installed the [client side code](https://github.com/jsheridanwells/LivePolling), navigate to `http://localhost:8080`. The app should be functioning from the browser.
  
- ## Build With:
+ ## Built With:
 
 [Ruby on Rails 5.1.4](http://rubyonrails.org/)
 
